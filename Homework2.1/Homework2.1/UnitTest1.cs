@@ -97,7 +97,7 @@ namespace Homework2._1
             var listPetData = JsonConvert.DeserializeObject<PetModel>(getResponse.Content.ReadAsStringAsync().Result);
 
             // filter created data
-            var createdPetData = listPetData.name;
+            var createdPetDataName = listPetData.name;
 
             #endregion
 
@@ -131,8 +131,8 @@ namespace Homework2._1
             
             petData.id = 123123;
             petData.category = new Category { id = 0, name = "string" };
-            petData.name = "Whitey";
-            petData.photoUrls = new string[] { "test1", "test2" };
+            petData.name = "WhiteyUpated";
+            petData.photoUrls = new string[] { "test12", "test22" };
             petData.tags = new Tag[] { new Tag() { id = 0, name = "string" } };
             petData.status = "available";
 
@@ -142,7 +142,7 @@ namespace Homework2._1
             postRequest = new StringContent(request, Encoding.UTF8, "application/json");
 
             // Send Put Request
-            var httpResponse = await httpClient.PutAsync(GetURL($"{UsersEndpoint}/{createdPetData}"), postRequest);
+            var httpResponse = await httpClient.PutAsync(GetURL($"{UsersEndpoint}/{createdPetDataName}"), postRequest);
 
             var x = httpResponse;
 
@@ -160,7 +160,7 @@ namespace Homework2._1
             listPetData = JsonConvert.DeserializeObject<PetModel>(getResponse.Content.ReadAsStringAsync().Result);
 
             // filter created data
-            createdPetData = listPetData.name;
+            createdPetDataName = listPetData.name;
 
             #endregion
 
@@ -175,7 +175,8 @@ namespace Homework2._1
 
             // Assertion
             Assert.AreEqual(HttpStatusCode.OK, statusCode, "Status code is not equal to 201");
-            Assert.AreEqual(petData.name, createdPetData, "Pet Name not matching");
+            Assert.AreEqual(petData.name, createdPetDataName, "Pet Name not matching");
+            //test
 
             #endregion
 
